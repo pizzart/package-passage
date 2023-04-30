@@ -1,8 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://ba1sb72bok2w2"]
+[gd_scene load_steps=17 format=3 uid="uid://ba1sb72bok2w2"]
 
 [ext_resource type="Script" path="res://scripts/car.gd" id="1_lc25x"]
 [ext_resource type="ArrayMesh" uid="uid://e3u4hllmofv6" path="res://models/truck.obj" id="2_1cndh"]
 [ext_resource type="Shader" path="res://misc/post.gdshader" id="3_3l3g1"]
+[ext_resource type="PackedScene" uid="uid://1fr5lid3bcx2" path="res://scenes/smoke_particles.tscn" id="3_sn8hf"]
 [ext_resource type="PackedScene" uid="uid://guuosfxpri7t" path="res://scenes/car_back.tscn" id="4_05v6f"]
 [ext_resource type="Script" path="res://scripts/skills.gd" id="5_n1kdq"]
 [ext_resource type="Texture2D" uid="uid://ct7gxdrncimdw" path="res://textures/arrow.png" id="6_3n8s3"]
@@ -98,6 +99,8 @@ gi_mode = 2
 mesh = SubResource("ArrayMesh_riu32")
 skeleton = NodePath("")
 
+[node name="SmokeParticles" parent="RL" instance=ExtResource("3_sn8hf")]
+
 [node name="RR" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -0.5, -0.516254, -1.25509)
 shape = SubResource("CylinderShape3D_01eqy")
@@ -107,6 +110,8 @@ transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 
 gi_mode = 2
 mesh = SubResource("ArrayMesh_riu32")
 skeleton = NodePath("")
+
+[node name="SmokeParticles" parent="RR" instance=ExtResource("3_sn8hf")]
 
 [node name="RL2" type="CollisionShape3D" parent="."]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0.5, -0.516254, -0.688488)

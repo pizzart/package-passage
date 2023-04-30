@@ -73,6 +73,9 @@ func _process(delta):
 		rotation.x = lerpf(rotation.x, clampf(-velocity.y / 10, -PI / 4, PI / 4), delta * 5)
 		acceleration.y += last_velocity.y
 	
+	$RL/SmokeParticles.emitting = drifting and is_on_floor()
+	$RR/SmokeParticles.emitting = drifting and is_on_floor()
+	
 	acceleration.y = gravity
 	velocity += acceleration * delta * 1.2
 	last_velocity = get_real_velocity()

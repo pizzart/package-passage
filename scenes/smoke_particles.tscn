@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://1fr5lid3bcx2"]
+
+[sub_resource type="Curve" id="Curve_56wot"]
+_data = [Vector2(0, 0.3), 0.0, 0.0, 0, 0, Vector2(0.508403, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.841414, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_iutu3"]
+curve = SubResource("Curve_56wot")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ujmyh"]
+direction = Vector3(0, 0.2, 1)
+spread = 40.0
+flatness = 0.7
+gravity = Vector3(0, 1, 0)
+initial_velocity_min = 0.56
+initial_velocity_max = 0.56
+linear_accel_min = 6.87
+linear_accel_max = 9.83
+scale_min = 0.88
+scale_max = 1.33
+scale_curve = SubResource("CurveTexture_iutu3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n2lmb"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.694118)
+grow_amount = 1.678
+
+[sub_resource type="SphereMesh" id="SphereMesh_jwrhe"]
+material = SubResource("StandardMaterial3D_n2lmb")
+radial_segments = 16
+rings = 8
+
+[node name="SmokeParticles" type="GPUParticles3D"]
+emitting = false
+amount = 40
+lifetime = 1.5
+process_material = SubResource("ParticleProcessMaterial_ujmyh")
+draw_pass_1 = SubResource("SphereMesh_jwrhe")
