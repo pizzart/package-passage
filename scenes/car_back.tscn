@@ -1,0 +1,145 @@
+[gd_scene load_steps=11 format=3 uid="uid://guuosfxpri7t"]
+
+[ext_resource type="Script" path="res://scripts/car_back.gd" id="1_30xrv"]
+[ext_resource type="ArrayMesh" uid="uid://c8uynxreal5jj" path="res://models/truckwheel.obj" id="1_uqkg3"]
+[ext_resource type="PackedScene" uid="uid://b4yqovmrw7lyw" path="res://scenes/bottle.tscn" id="2_0p57k"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gek81"]
+flip_faces = true
+size = Vector3(1.5, 1.1, 2.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uwah6"]
+size = Vector3(1.5, 1.12, 2.8)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_2sh01"]
+height = 0.5
+radius = 0.25
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8rcyv"]
+height = 0.5
+radius = 0.25
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_847gr"]
+size = Vector3(1.5, 0.063, 2.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_kjno5"]
+size = Vector3(0.4, 1.066, 2.8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lk4yg"]
+size = Vector3(1.5, 1.082, 0.643021)
+
+[node name="CarBack" type="CharacterBody3D"]
+collision_layer = 2
+script = ExtResource("1_30xrv")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.521206, -1.36582)
+gi_mode = 2
+mesh = SubResource("BoxMesh_gek81")
+
+[node name="Collision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.521206, -1.36582)
+shape = SubResource("BoxShape3D_uwah6")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, -0.281956, -2.38782)
+gi_mode = 2
+mesh = ExtResource("1_uqkg3")
+skeleton = NodePath("../RearLeft")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.7, -0.281956, -2.38782)
+gi_mode = 2
+mesh = ExtResource("1_uqkg3")
+skeleton = NodePath("../RearRight")
+
+[node name="RearLeft" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0.7, -0.281956, -2.38782)
+shape = SubResource("CylinderShape3D_2sh01")
+
+[node name="RearRight" type="CollisionShape3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.7, -0.281956, -2.38782)
+shape = SubResource("CylinderShape3D_8rcyv")
+
+[node name="AnimatableBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.406727, -1.37552)
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.412705, 0.00723553)
+shape = SubResource("BoxShape3D_847gr")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.633792, 0.00723553)
+shape = SubResource("BoxShape3D_847gr")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.564178, 0.115966, 0.00723553)
+shape = SubResource("BoxShape3D_kjno5")
+
+[node name="CollisionShape3D6" type="CollisionShape3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.554356, 0.115966, 0.00723553)
+shape = SubResource("BoxShape3D_kjno5")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.118983, 1.21088)
+shape = SubResource("BoxShape3D_lk4yg")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="AnimatableBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.118983, -1.0762)
+shape = SubResource("BoxShape3D_lk4yg")
+
+[node name="Bottle" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050968, 0.429511, -2.00048)
+
+[node name="Bottle2" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050968, 0.429511, -1.77171)
+
+[node name="Bottle3" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050968, 0.429511, -1.46546)
+
+[node name="Bottle4" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050968, 0.429511, -1.24112)
+
+[node name="Bottle5" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050968, 0.429511, -1.00158)
+
+[node name="Bottle6" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.050968, 0.429511, -0.775733)
+
+[node name="Bottle7" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.320604, 0.429511, -2.00048)
+
+[node name="Bottle8" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.320604, 0.429511, -1.77171)
+
+[node name="Bottle9" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.320604, 0.429511, -1.46546)
+
+[node name="Bottle10" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.320604, 0.429511, -1.24112)
+
+[node name="Bottle11" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.320604, 0.429511, -1.00158)
+
+[node name="Bottle12" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.320604, 0.429511, -0.775733)
+
+[node name="Bottle13" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326938, 0.429511, -2.00048)
+
+[node name="Bottle14" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326938, 0.429511, -1.77171)
+
+[node name="Bottle15" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326938, 0.429511, -1.46546)
+
+[node name="Bottle16" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326938, 0.429511, -1.24112)
+
+[node name="Bottle17" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326938, 0.429511, -1.00158)
+
+[node name="Bottle18" parent="." instance=ExtResource("2_0p57k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.326938, 0.429511, -0.775733)

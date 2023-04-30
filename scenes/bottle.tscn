@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4yqovmrw7lyw"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qvf2s"]
+height = 0.5
+radius = 0.1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ngse8"]
+albedo_color = Color(0.431373, 0.619608, 0.129412, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ykxj8"]
+material = SubResource("StandardMaterial3D_ngse8")
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.5
+radial_segments = 8
+
+[node name="Bottle" type="RigidBody3D" groups=["bottle"]]
+top_level = true
+collision_layer = 4
+collision_mask = 5
+mass = 0.5
+continuous_cd = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_qvf2s")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+sorting_offset = 0.99
+cast_shadow = 0
+gi_mode = 2
+mesh = SubResource("CylinderMesh_ykxj8")

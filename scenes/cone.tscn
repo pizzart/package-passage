@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b61ibykwxqher"]
+
+[ext_resource type="PackedScene" uid="uid://c2jjwdh3qstiy" path="res://models/cone.glb" id="1_ug4dr"]
+
+[node name="cone" instance=ExtResource("1_ug4dr")]
+
+[node name="Cone" parent="." index="0"]
+collision_layer = 8
+collision_mask = 9

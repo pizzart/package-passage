@@ -1,0 +1,47 @@
+[gd_scene load_steps=3 format=3 uid="uid://hbj6ur7gtr4a"]
+
+[ext_resource type="FontFile" uid="uid://dmk3c46t340jw" path="res://misc/Outfit-Regular.ttf" id="1_8bjir"]
+
+[sub_resource type="Theme" id="Theme_oxax5"]
+default_font = ExtResource("1_8bjir")
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="C" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_oxax5")
+
+[node name="M" type="MarginContainer" parent="C"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Score" type="Label" parent="C/M"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "SCORE: 0"
+
+[node name="Time" type="Label" parent="C/M"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "0s"
+
+[node name="Skills" type="Label" parent="C/M"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+horizontal_alignment = 2

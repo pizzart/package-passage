@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6dw7wrcpgtkn"]
+
+[ext_resource type="PackedScene" uid="uid://b8cj36vtf637l" path="res://models/garbagebin.glb" id="1_7ue6e"]
+
+[node name="garbagebin" instance=ExtResource("1_7ue6e")]
+
+[node name="Bin" parent="." index="0"]
+collision_layer = 8
+collision_mask = 9

@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1w2p7od15cas"]
+
+[ext_resource type="PackedScene" uid="uid://bcuyq4ql8vst1" path="res://models/delivery.glb" id="1_80fmf"]
+[ext_resource type="Script" path="res://scripts/delivery.gd" id="2_37pew"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_b6q08"]
+size = Vector3(8, 1, 9)
+
+[node name="delivery" instance=ExtResource("1_80fmf")]
+script = ExtResource("2_37pew")
+
+[node name="Area3D" type="Area3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.11558)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("BoxShape3D_b6q08")
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_body_entered" flags=18]

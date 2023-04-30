@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf4p8b5edxhn8"]
+
+[ext_resource type="PackedScene" uid="uid://b6ayxfylkomqn" path="res://models/sign.glb" id="1_op06i"]
+
+[node name="sign" instance=ExtResource("1_op06i")]
+
+[node name="Sign" parent="." index="0"]
+collision_layer = 8
+sleeping = true
