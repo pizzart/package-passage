@@ -2,28 +2,32 @@ extends CharacterBody3D
 
 signal ring_entered
 signal wall_destroyed
+signal bin_hit
+signal cone_hit
 signal delivery_started(id: int)
 signal delivery_done
 #var slip_speed = 15.0
-var traction_slow = 0.3
-var traction_fast = 0.02
+var traction_slow = 0.2
+var traction_fast = 0.01
 
 var drifting = false
+var drift_time: float = 0.5
 
 var gravity = -20
 var wheel_base = 1.1  # distance between front/rear axles
 var steering_limit = 7  # front wheel max turning angle (deg)
 #var accel_power = 0.1
-var engine_power = 25.0
-var braking = -9.0
+var engine_power = 15.0
+var braking = -10.0
 var friction = -1.0
 var drag = -3.0
-var max_speed_reverse = 10.0
+var max_speed_reverse = 12.0
 
 var last_velocity: Vector3
 
 var acceleration = Vector3.ZERO  # current acceleration
 var steer_angle = 0.0  # current wheel angle
+var traction = traction_slow
 
 func _process(delta):
 	$CameraGimbal.position = $CameraGimbal.position.lerp(position + Vector3(0, 1, 0), delta * 20)
@@ -46,7 +50,7 @@ func _process(delta):
 #	engine_force = Input.get_action_strength("accelerate") * 300
 #	brake = Input.get_action_strength("brake") * 20
 
-func _physics_process(delta):
+#func _physics_process(delta):
 	if is_on_floor():
 		get_input()
 		apply_friction(delta)
@@ -70,7 +74,7 @@ func _physics_process(delta):
 		acceleration.y += last_velocity.y
 	
 	acceleration.y = gravity
-	velocity += acceleration * delta
+	velocity += acceleration * delta * 1.2
 	last_velocity = get_real_velocity()
 	move_and_slide()
 	
@@ -93,26 +97,36 @@ func calculate_steering(delta):
 	rear_wheel += velocity * delta
 	front_wheel += velocity.rotated(transform.basis.y, steer_angle) * delta
 	var new_heading = rear_wheel.direction_to(front_wheel)
+	
+	var d = new_heading.dot(velocity.normalized())
+	
+	drifting = drifting and velocity.length() > 2 and d < 0 and abs(steer_angle) > 0.1
+	if drifting:
+		drift_time = 0.5
+	else:
+		if drift_time > 0:
+			drifting = true
+		drift_time -= delta
 	# traction
 #	if not drifting and velocity.length() > slip_speed:
 #		drifting = true
 #	if drifting and velocity.length() < slip_speed and steer_angle == 0:
 #		drifting = false
-	var traction = traction_fast if drifting else traction_slow
+	traction = lerpf(traction, traction_fast if drifting else traction_slow, delta * 2)
+#	print(traction)
 
-	var d = new_heading.dot(velocity.normalized())
 	if d > 0:
 		velocity = new_heading * min(velocity.length(), max_speed_reverse)
 	if d < 0:
 #		velocity = -new_heading * velocity.length()
-		velocity = lerp(velocity, -new_heading * velocity.length(), traction)
+		velocity = lerp(velocity, -new_heading * (velocity.length() - abs(steer_angle) * 1.5), traction)
 	look_at(transform.origin + new_heading, transform.basis.y)
 
 func get_input():
 	var turn = Input.get_axis("left", "right")
 	steer_angle = turn * deg_to_rad(steering_limit)
 	if drifting:
-		steer_angle *= 1.2
+		steer_angle *= 1.5
 	$FR.rotation.y = steer_angle * 2
 	$FL.rotation.y = steer_angle * 2
 	acceleration = Vector3.ZERO

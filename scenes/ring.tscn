@@ -1,13 +1,13 @@
 [gd_scene load_steps=4 format=3 uid="uid://c7cde6w1n5d4e"]
 
-[ext_resource type="PackedScene" uid="uid://b6ayxfylkomqn" path="res://models/ring.glb" id="1_qh5ee"]
+[ext_resource type="PackedScene" uid="uid://clmdlhagtav06" path="res://models/ring.glb" id="1_0qtlc"]
 [ext_resource type="Script" path="res://scripts/ring.gd" id="2_ndon5"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_i6dwr"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_lixuq"]
 height = 0.5
 radius = 2.527
 
-[node name="ring" instance=ExtResource("1_qh5ee")]
+[node name="ring" instance=ExtResource("1_0qtlc")]
 script = ExtResource("2_ndon5")
 
 [node name="Area3D" type="Area3D" parent="." index="1"]
@@ -15,6 +15,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.80209, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
-shape = SubResource("CylinderShape3D_i6dwr")
+shape = SubResource("CylinderShape3D_lixuq")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_body_entered"]

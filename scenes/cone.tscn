@@ -1,9 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://b61ibykwxqher"]
+[gd_scene load_steps=4 format=3 uid="uid://b61ibykwxqher"]
 
 [ext_resource type="PackedScene" uid="uid://c2jjwdh3qstiy" path="res://models/cone.glb" id="1_ug4dr"]
+[ext_resource type="Script" path="res://scripts/cone.gd" id="2_nr2ot"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jil0j"]
+size = Vector3(1.80128, 1.95592, 1.9695)
 
 [node name="cone" instance=ExtResource("1_ug4dr")]
+script = ExtResource("2_nr2ot")
 
 [node name="Cone" parent="." index="0"]
 collision_layer = 8
 collision_mask = 9
+
+[node name="Area3D" type="Area3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.712331, 0)
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("BoxShape3D_jil0j")
+
+[connection signal="body_entered" from="Cone" to="." method="_on_cone_body_entered"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_body_entered"]

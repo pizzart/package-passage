@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://ba1sb72bok2w2"]
 
 [ext_resource type="Script" path="res://scripts/car.gd" id="1_lc25x"]
-[ext_resource type="ArrayMesh" uid="uid://bh8vbfdbx3d0j" path="res://models/truck.obj" id="2_slrxr"]
+[ext_resource type="ArrayMesh" uid="uid://e3u4hllmofv6" path="res://models/truck.obj" id="2_1cndh"]
 [ext_resource type="Shader" path="res://misc/post.gdshader" id="3_3l3g1"]
 [ext_resource type="PackedScene" uid="uid://guuosfxpri7t" path="res://scenes/car_back.tscn" id="4_05v6f"]
 [ext_resource type="Script" path="res://scripts/skills.gd" id="5_n1kdq"]
@@ -78,7 +78,7 @@ script = ExtResource("1_lc25x")
 transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, -0.362262, -0.217442)
 material_override = SubResource("StandardMaterial3D_43e07")
 gi_mode = 2
-mesh = ExtResource("2_slrxr")
+mesh = ExtResource("2_1cndh")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28309, -0.289875)

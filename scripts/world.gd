@@ -15,7 +15,7 @@ func _ready():
 func _process(delta):
 	if delivering:
 		time -= delta
-		HUD.get_node("C/M/Time").text = "%ss" % floor(time)
+		HUD.get_node("C/M/Time").text = "%s" % floor(time)
 	else:
 		time = 60
 		HUD.get_node("C/M/Time").text = ""
