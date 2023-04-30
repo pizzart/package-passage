@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://hbj6ur7gtr4a"]
+[gd_scene load_steps=5 format=3 uid="uid://hbj6ur7gtr4a"]
 
 [ext_resource type="FontFile" uid="uid://dmk3c46t340jw" path="res://misc/Outfit-Regular.ttf" id="1_8bjir"]
 [ext_resource type="FontFile" uid="uid://ds7l2e3nfwa4m" path="res://misc/beatstreet.ttf" id="2_lsfox"]
+[ext_resource type="AudioStream" uid="uid://b8md80rpptypj" path="res://audio/sfx/counter.wav" id="3_bal3u"]
 
 [sub_resource type="Theme" id="Theme_oxax5"]
 default_font = ExtResource("1_8bjir")
@@ -15,6 +16,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme = SubResource("Theme_oxax5")
 
 [node name="M" type="MarginContainer" parent="C"]
@@ -33,6 +35,8 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_lsfox")
 theme_override_font_sizes/font_size = 24
 text = "SCORE: 0"
@@ -41,6 +45,8 @@ text = "SCORE: 0"
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_lsfox")
 theme_override_font_sizes/font_size = 24
 text = "0"
@@ -49,6 +55,13 @@ text = "0"
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
 theme_override_fonts/font = ExtResource("2_lsfox")
 theme_override_font_sizes/font_size = 24
 horizontal_alignment = 2
+
+[node name="CountAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bal3u")
+volume_db = -13.0
+bus = &"sfx"

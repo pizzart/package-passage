@@ -7,3 +7,4 @@ func _on_area_body_entered(body):
 		if not touched:
 			touched = true
 			body.emit_signal("cone_hit")
+		$HitAudio.play()

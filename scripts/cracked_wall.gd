@@ -7,5 +7,6 @@ func _on_area_body_entered(body):
 		$Area3D.set_deferred("monitoring", false)
 		$wall/Cube/StaticBody3D/CollisionShape3D.set_deferred("disabled", true)
 		$DestroyParticles.restart()
+		$BreakAudio.play()
 		await get_tree().create_timer(2).timeout
 		queue_free()

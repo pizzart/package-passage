@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://ba1sb72bok2w2"]
+[gd_scene load_steps=21 format=3 uid="uid://drms2xcku6to3"]
 
 [ext_resource type="Script" path="res://scripts/car.gd" id="1_lc25x"]
 [ext_resource type="ArrayMesh" uid="uid://e3u4hllmofv6" path="res://models/truck.obj" id="2_1cndh"]
@@ -7,6 +7,10 @@
 [ext_resource type="PackedScene" uid="uid://guuosfxpri7t" path="res://scenes/car_back.tscn" id="4_05v6f"]
 [ext_resource type="Script" path="res://scripts/skills.gd" id="5_n1kdq"]
 [ext_resource type="Texture2D" uid="uid://ct7gxdrncimdw" path="res://textures/arrow.png" id="6_3n8s3"]
+[ext_resource type="AudioStream" uid="uid://d4nncbuk8hvfs" path="res://audio/sfx/drift.wav" id="8_csgor"]
+[ext_resource type="AudioStream" uid="uid://b4cfiysajlj3s" path="res://audio/sfx/engine2.wav" id="9_i8j25"]
+[ext_resource type="AudioStream" uid="uid://dcsxinvunl4r4" path="res://audio/sfx/engine.wav" id="9_w0d0m"]
+[ext_resource type="AudioStream" uid="uid://dd38j0eax08ta" path="res://audio/sfx/car_fall.wav" id="11_q670d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43e07"]
 albedo_color = Color(0.956863, 0.298039, 0.482353, 1)
@@ -73,6 +77,7 @@ shader_parameter/highlight_color = Color(1, 1, 1, 1)
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
 
 [node name="Car" type="CharacterBody3D" groups=["player"]]
+floor_max_angle = 1.0472
 script = ExtResource("1_lc25x")
 
 [node name="Truck" type="MeshInstance3D" parent="."]
@@ -169,7 +174,7 @@ mesh = SubResource("QuadMesh_l680w")
 surface_material_override/0 = SubResource("ShaderMaterial_vjv52")
 
 [node name="CarBack" parent="." instance=ExtResource("4_05v6f")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0982618, -1.46382)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.131075, -1.20936)
 top_level = true
 
 [node name="Skills" type="Node" parent="."]
@@ -183,3 +188,24 @@ pixel_size = 0.16
 no_depth_test = true
 texture_filter = 4
 texture = ExtResource("6_3n8s3")
+
+[node name="DriftAudio" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("8_csgor")
+attenuation_model = 3
+volume_db = -6.0
+bus = &"sfx"
+attenuation_filter_cutoff_hz = 20000.0
+
+[node name="EngineAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_i8j25")
+autoplay = true
+bus = &"engine"
+
+[node name="EngineAudio2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_w0d0m")
+autoplay = true
+bus = &"engine"
+
+[node name="FallAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_q670d")
+bus = &"sfx"

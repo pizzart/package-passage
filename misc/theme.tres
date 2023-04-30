@@ -1,0 +1,24 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://dxieua7c6kfsj"]
+
+[ext_resource type="FontFile" uid="uid://ds7l2e3nfwa4m" path="res://misc/beatstreet.ttf" id="1_8rhda"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b3pcq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4wm78"]
+
+[resource]
+default_font = ExtResource("1_8rhda")
+default_font_size = 20
+Button/colors/font_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/colors/font_hover_color = Color(1, 0.6, 0.72549, 1)
+Button/colors/font_hover_pressed_color = Color(0.94902, 0, 0.505882, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0.94902, 0, 0.505882, 1)
+Button/constants/outline_size = 12
+Button/font_sizes/font_size = 24
+Button/styles/disabled = SubResource("StyleBoxEmpty_b3pcq")
+Button/styles/focus = SubResource("StyleBoxEmpty_4wm78")
+Button/styles/hover = SubResource("StyleBoxEmpty_4wm78")
+Button/styles/normal = SubResource("StyleBoxEmpty_4wm78")
+Button/styles/pressed = SubResource("StyleBoxEmpty_4wm78")

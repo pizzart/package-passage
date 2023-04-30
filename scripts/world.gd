@@ -2,7 +2,7 @@ extends Node3D
 
 var delivering: bool
 var delivery_id: int
-var time: float = 60
+var time: float = 90
 
 func _ready():
 	var id = 0
@@ -13,15 +13,15 @@ func _ready():
 	$Car.connect("delivery_done", _on_delivery_done)
 
 func _process(delta):
-	if delivering:
-		time -= delta
-		HUD.get_node("C/M/Time").text = "%s" % floor(time)
-	else:
-		time = 60
-		HUD.get_node("C/M/Time").text = ""
+#	if delivering:
+	time -= delta
+	HUD.get_node("C/M/Time").text = "%s" % floor(time)
+	
+#	HUD.get_node("C/M/Time").text = ""
+	
 	if time <= 0:
 		GameOver.show()
-		GameOver.get_node("C/P/V/Score").text = "SCORE: %s" % $Car/Skills.score
+		GameOver.get_node("C/P/V/Score").text = GameOver.get_node("C/P/V/Score").text % $Car/Skills.score
 		get_tree().paused = true
 
 func _on_delivery_started(id: int):

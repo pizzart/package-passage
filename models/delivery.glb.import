@@ -33,8 +33,9 @@ _subresources={
 "PATH:Delivery": {
 "generate/physics": true,
 "physics/shape_type": 5,
-"primitive/height": 2.0,
-"primitive/position": Vector3(0, 1, 0)
+"primitive/height": 72.0,
+"primitive/position": Vector3(0, 36, 0),
+"primitive/radius": 6.0
 }
 }
 }

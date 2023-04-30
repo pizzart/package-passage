@@ -1,28 +1,19 @@
-[gd_scene load_steps=8 format=3 uid="uid://bhexvqp5vgyvj"]
+[gd_scene load_steps=6 format=3 uid="uid://bhexvqp5vgyvj"]
 
-[ext_resource type="PackedScene" uid="uid://ba1sb72bok2w2" path="res://scenes/car.tscn" id="1_kav1c"]
+[ext_resource type="PackedScene" uid="uid://drms2xcku6to3" path="res://scenes/car.tscn" id="1_kav1c"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_yoa0g"]
+[ext_resource type="Environment" uid="uid://5vjbgd8jarup" path="res://misc/world.tres" id="3_js0i1"]
 [ext_resource type="PackedScene" uid="uid://cx1ftkeks1k1l" path="res://scenes/map.tscn" id="6_vtru8"]
 [ext_resource type="AudioStream" uid="uid://dthb6dx4nhsba" path="res://audio/music/ingame.ogg" id="11_8ukt0"]
-
-[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_l6vtg"]
-
-[sub_resource type="Sky" id="Sky_1nyj5"]
-sky_material = SubResource("PhysicalSkyMaterial_l6vtg")
-
-[sub_resource type="Environment" id="Environment_f1x8n"]
-background_mode = 2
-sky = SubResource("Sky_1nyj5")
-sdfgi_enabled = true
 
 [node name="World" type="Node3D"]
 script = ExtResource("1_yoa0g")
 
 [node name="Car" parent="." instance=ExtResource("1_kav1c")]
-transform = Transform3D(0.966205, 0, 0.257774, 0, 1, 0, -0.257774, 0, 0.966205, -1.66081, 2, -44.3591)
+transform = Transform3D(-0.983916, 0, -0.178631, 0, 1, 0, 0.178631, 0, -0.983916, -50.616, 2, 36.4516)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_f1x8n")
+environment = ExtResource("3_js0i1")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.866025, 0.353553, -0.353554, 0, 0.707107, 0.707106, 0.5, -0.612372, 0.612373, 0, 4.5985, 0)
@@ -30,9 +21,8 @@ light_color = Color(0.854902, 0.643137, 0.639216, 1)
 light_energy = 2.0
 shadow_enabled = true
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+[node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_8ukt0")
-volume_db = -25.06
 autoplay = true
 bus = &"mus"
 

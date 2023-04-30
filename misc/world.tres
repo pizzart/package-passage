@@ -1,0 +1,18 @@
+[gd_resource type="Environment" load_steps=3 format=3 uid="uid://5vjbgd8jarup"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_l6vtg"]
+
+[sub_resource type="Sky" id="Sky_1nyj5"]
+sky_material = SubResource("PhysicalSkyMaterial_l6vtg")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_1nyj5")
+tonemap_mode = 3
+tonemap_exposure = 1.1
+ssao_enabled = true
+ssao_radius = 1.82
+ssao_intensity = 4.85
+sdfgi_enabled = true
+adjustment_enabled = true
+adjustment_contrast = 0.93

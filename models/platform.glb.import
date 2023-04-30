@@ -37,8 +37,11 @@ _subresources={
 },
 "nodes": {
 "PATH:Platform": {
+"decomposition/precision": 10,
 "generate/physics": true,
-"physics/shape_type": 2
+"physics/shape_type": 3,
+"primitive/position": Vector3(0, 0.9, 0),
+"primitive/size": Vector3(2, 0.1, 2)
 }
 }
 }

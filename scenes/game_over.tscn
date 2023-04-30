@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://c02ryld4xbbva"]
+[gd_scene load_steps=7 format=3 uid="uid://c02ryld4xbbva"]
 
 [ext_resource type="Script" path="res://scripts/game_over.gd" id="1_7lrwb"]
+[ext_resource type="FontFile" uid="uid://ds7l2e3nfwa4m" path="res://misc/beatstreet.ttf" id="2_2hhg1"]
+[ext_resource type="Theme" uid="uid://dxieua7c6kfsj" path="res://misc/theme.tres" id="2_cn6dn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cw1l4"]
+bg_color = Color(0.054902, 0, 0.301961, 0.329412)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_54qwq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d4ue8"]
 
 [node name="GameOver" type="CanvasLayer"]
 process_mode = 3
@@ -14,6 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("2_cn6dn")
 
 [node name="P" type="PanelContainer" parent="C"]
 layout_mode = 1
@@ -22,24 +32,35 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cw1l4")
 
 [node name="V" type="VBoxContainer" parent="C/P"]
 layout_mode = 2
 alignment = 1
 
-[node name="Label" type="Label" parent="C/P/V"]
+[node name="GameOver" type="Label" parent="C/P/V"]
 layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 24
+theme_override_fonts/font = ExtResource("2_2hhg1")
+theme_override_font_sizes/font_size = 36
 text = "GAME OVER"
 horizontal_alignment = 1
 
 [node name="Score" type="Label" parent="C/P/V"]
 layout_mode = 2
-text = "Score: 0"
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("2_2hhg1")
+theme_override_font_sizes/font_size = 24
+text = "        score: %s"
 horizontal_alignment = 1
 
 [node name="Restart" type="Button" parent="C/P/V"]
 layout_mode = 2
 size_flags_horizontal = 4
-text = "restart"
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_54qwq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_d4ue8")
+text = "restart   "
 
 [connection signal="pressed" from="C/P/V/Restart" to="." method="_on_restart_pressed"]

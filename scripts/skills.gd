@@ -12,18 +12,26 @@ func _ready():
 	car.connect("wall_destroyed", _on_wall_destroyed)
 	car.connect("bin_hit", _on_bin_hit)
 	car.connect("cone_hit", _on_cone_hit)
+	car.connect("sign_hit", _on_roadsign_hit)
+	car.connect("light_hit", _on_roadsign_hit)
 	car.connect("delivery_done", _on_delivery_done)
 
 func _process(delta):
 	if hud_score < score:
 		hud_score += roundi(delta * 300)
-	if hud_score > score:
-		hud_score = score
+		HUD.get_node("CountAudio").play()
+		HUD.get_node("CountAudio").pitch_scale += delta
+	else:
+		HUD.get_node("CountAudio").stop()
+		HUD.get_node("CountAudio").pitch_scale = 1
+	
+		if hud_score > score:
+			hud_score = score
 	
 	HUD.get_node("C/M/Score").text = "SCORE: %s" % hud_score
 	
 	air_time = long_skill("air", "AIR TIME: %ss", air_time, not car.is_on_floor(), delta, 100)
-	drift_time = long_skill("drift", "DRIFT TIME: %ss", drift_time, car.drifting and car.velocity.length() > 2, delta, 150)
+	drift_time = long_skill("drift", "DRIFT TIME: %ss", drift_time, car.drifting and car.velocity.length() > 2, delta, 50)
 	
 	HUD.get_node("C/M/Skills").text = ""
 	for skill in active_skills.values():
@@ -48,7 +56,7 @@ func long_skill(skill: String, hud_text: String, time: float, condition: bool, d
 	return time
 
 func _on_ring_entered():
-	short_skill("ring", "RING", 250)
+	short_skill("ring", "RING JUMP", 250)
 
 func _on_wall_destroyed():
 	short_skill("wall", "WALL DESTRUCTION", 150)
@@ -61,3 +69,6 @@ func _on_bin_hit():
 
 func _on_cone_hit():
 	short_skill("cone", "ROAD RAGE", 150)
+
+func _on_roadsign_hit():
+	short_skill("roadsign", "RULEBREAKER", 150)
