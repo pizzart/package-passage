@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://decgkh02hynxv"]
+[gd_scene load_steps=25 format=3 uid="uid://decgkh02hynxv"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_wvoqm"]
 [ext_resource type="PackedScene" uid="uid://cx1ftkeks1k1l" path="res://scenes/map.tscn" id="2_5mf5u"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" path="res://misc/post.gdshader" id="4_2lq8o"]
 [ext_resource type="AudioStream" uid="uid://mbaxlii1w3tm" path="res://audio/sfx/object_hit.wav" id="6_0vpsi"]
 [ext_resource type="PackedScene" uid="uid://ciljsccqk22k3" path="res://models/boombox.glb" id="7_r4kbu"]
+[ext_resource type="Texture2D" uid="uid://dx3vi5lopn0lm" path="res://textures/title.png" id="9_2svxu"]
 [ext_resource type="Texture2D" uid="uid://b62o1seyd21dg" path="res://textures/note.png" id="9_sxckq"]
 [ext_resource type="PackedScene" uid="uid://dyej8m0y354uw" path="res://scenes/overlay.tscn" id="10_q4re1"]
 [ext_resource type="Theme" uid="uid://dxieua7c6kfsj" path="res://misc/theme.tres" id="11_swr3v"]
@@ -1198,6 +1199,13 @@ amount = 5
 lifetime = 4.84
 process_material = SubResource("ParticleProcessMaterial_38f6w")
 draw_pass_1 = SubResource("QuadMesh_3bfhb")
+
+[node name="Sprite3D" type="Sprite3D" parent="Map"]
+transform = Transform3D(-0.843391, 0, -0.5373, 0, 1, 0, 0.5373, 0, -0.843391, -35.068, 1.565, 8.957)
+pixel_size = 0.0024
+shaded = true
+texture_filter = 4
+texture = ExtResource("9_2svxu")
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_eme63")
