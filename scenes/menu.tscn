@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://decgkh02hynxv"]
+[gd_scene load_steps=24 format=3 uid="uid://decgkh02hynxv"]
 
 [ext_resource type="Script" path="res://scripts/menu.gd" id="1_wvoqm"]
 [ext_resource type="PackedScene" uid="uid://cx1ftkeks1k1l" path="res://scenes/map.tscn" id="2_5mf5u"]
@@ -6,6 +6,11 @@
 [ext_resource type="Environment" uid="uid://5vjbgd8jarup" path="res://misc/world.tres" id="3_eo67r"]
 [ext_resource type="FontFile" uid="uid://ds7l2e3nfwa4m" path="res://misc/beatstreet.ttf" id="3_hou13"]
 [ext_resource type="Shader" path="res://misc/post.gdshader" id="4_2lq8o"]
+[ext_resource type="AudioStream" uid="uid://mbaxlii1w3tm" path="res://audio/sfx/object_hit.wav" id="6_0vpsi"]
+[ext_resource type="PackedScene" uid="uid://ciljsccqk22k3" path="res://models/boombox.glb" id="7_r4kbu"]
+[ext_resource type="Texture2D" uid="uid://b62o1seyd21dg" path="res://textures/note.png" id="9_sxckq"]
+[ext_resource type="PackedScene" uid="uid://dyej8m0y354uw" path="res://scenes/overlay.tscn" id="10_q4re1"]
+[ext_resource type="Theme" uid="uid://dxieua7c6kfsj" path="res://misc/theme.tres" id="11_swr3v"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vfwoe"]
 resource_name = "ring"
@@ -86,27 +91,1026 @@ shader_parameter/highlight_strength = 0.1
 shader_parameter/highlight_color = Color(1, 1, 1, 1)
 shader_parameter/shadow_color = Color(0, 0, 0, 1)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_4tycn"]
+size = Vector3(0.879, 0.796, 0.1)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_udiqg"]
-size = Vector3(0.802, 0.72, 0.005)
+size = Vector3(5.048, 3.225, 1.743)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ugfvb"]
 size = Vector3(1.802, 1.395, 0.996)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_38f6w"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 0, 0)
+direction = Vector3(0, 1, 1)
+spread = 10.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 4.36
+initial_velocity_max = 4.36
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y4yy7"]
+transparency = 1
+albedo_texture = ExtResource("9_sxckq")
+texture_filter = 4
+texture_repeat = false
+billboard_mode = 2
+
+[sub_resource type="QuadMesh" id="QuadMesh_3bfhb"]
+material = SubResource("StandardMaterial3D_y4yy7")
+size = Vector2(0.6, 0.6)
 
 [node name="Menu" type="Node"]
 script = ExtResource("1_wvoqm")
 
 [node name="Map" parent="." instance=ExtResource("2_5mf5u")]
 
+[node name="ramp2" parent="Map" index="1"]
+visible = false
+
+[node name="ramp7" parent="Map" index="2"]
+visible = false
+
+[node name="ramp8" parent="Map" index="3"]
+visible = false
+
+[node name="ramp3" parent="Map" index="4"]
+visible = false
+
+[node name="ramp4" parent="Map" index="5"]
+visible = false
+
+[node name="ramp6" parent="Map" index="6"]
+visible = false
+
+[node name="ramp9" parent="Map" index="7"]
+visible = false
+
+[node name="ramp5" parent="Map" index="8"]
+visible = false
+
+[node name="sign" parent="Map" index="9"]
+visible = false
+
+[node name="sign2" parent="Map" index="10"]
+visible = false
+
+[node name="sign6" parent="Map" index="11"]
+visible = false
+
 [node name="Sign" parent="Map/sign5/Sign" index="0"]
 mesh = SubResource("ArrayMesh_iw1q3")
 
+[node name="cone" parent="Map" index="13"]
+visible = false
+
+[node name="cone2" parent="Map" index="14"]
+visible = false
+
+[node name="ring" parent="Map" index="15"]
+visible = false
+
+[node name="ring3" parent="Map" index="16"]
+visible = false
+
+[node name="ring4" parent="Map" index="17"]
+visible = false
+
+[node name="CrackedWall" parent="Map" index="18"]
+visible = false
+
+[node name="CrackedWall5" parent="Map" index="19"]
+visible = false
+
+[node name="Wall" parent="Map" index="20"]
+visible = false
+
+[node name="Wall11" parent="Map" index="21"]
+visible = false
+
+[node name="Wall101" parent="Map" index="22"]
+visible = false
+
+[node name="Wall104" parent="Map" index="23"]
+visible = false
+
+[node name="Wall12" parent="Map" index="24"]
+visible = false
+
+[node name="Wall13" parent="Map" index="25"]
+visible = false
+
+[node name="Wall23" parent="Map" index="26"]
+visible = false
+
+[node name="Wall27" parent="Map" index="27"]
+visible = false
+
+[node name="Wall24" parent="Map" index="28"]
+visible = false
+
+[node name="Wall25" parent="Map" index="29"]
+visible = false
+
+[node name="Wall26" parent="Map" index="30"]
+visible = false
+
+[node name="Wall14" parent="Map" index="31"]
+visible = false
+
+[node name="Wall16" parent="Map" index="32"]
+visible = false
+
+[node name="Wall15" parent="Map" index="33"]
+visible = false
+
+[node name="Wall17" parent="Map" index="34"]
+visible = false
+
+[node name="Wall18" parent="Map" index="35"]
+visible = false
+
+[node name="Wall61" parent="Map" index="36"]
+visible = false
+
+[node name="Wall19" parent="Map" index="37"]
+visible = false
+
+[node name="Wall69" parent="Map" index="38"]
+visible = false
+
+[node name="Wall70" parent="Map" index="39"]
+visible = false
+
+[node name="Wall71" parent="Map" index="40"]
+visible = false
+
+[node name="Wall94" parent="Map" index="41"]
+visible = false
+
+[node name="Wall95" parent="Map" index="42"]
+visible = false
+
+[node name="Wall96" parent="Map" index="43"]
+visible = false
+
+[node name="Wall97" parent="Map" index="44"]
+visible = false
+
+[node name="Wall98" parent="Map" index="45"]
+visible = false
+
+[node name="Wall99" parent="Map" index="46"]
+visible = false
+
+[node name="Wall102" parent="Map" index="47"]
+visible = false
+
+[node name="Wall103" parent="Map" index="48"]
+visible = false
+
+[node name="Wall105" parent="Map" index="49"]
+visible = false
+
+[node name="Wall107" parent="Map" index="50"]
+visible = false
+
+[node name="Wall108" parent="Map" index="51"]
+visible = false
+
+[node name="Wall109" parent="Map" index="52"]
+visible = false
+
+[node name="Wall110" parent="Map" index="53"]
+visible = false
+
+[node name="Wall111" parent="Map" index="54"]
+visible = false
+
+[node name="Wall113" parent="Map" index="55"]
+visible = false
+
+[node name="Wall114" parent="Map" index="56"]
+visible = false
+
+[node name="Wall106" parent="Map" index="57"]
+visible = false
+
+[node name="Wall72" parent="Map" index="58"]
+visible = false
+
+[node name="Wall20" parent="Map" index="59"]
+visible = false
+
+[node name="Wall2" parent="Map" index="60"]
+visible = false
+
+[node name="Wall9" parent="Map" index="61"]
+visible = false
+
+[node name="Wall10" parent="Map" index="62"]
+visible = false
+
+[node name="Wall3" parent="Map" index="63"]
+visible = false
+
+[node name="Wall21" parent="Map" index="64"]
+visible = false
+
+[node name="Wall22" parent="Map" index="65"]
+visible = false
+
+[node name="Wall31" parent="Map" index="66"]
+visible = false
+
+[node name="Wall28" parent="Map" index="67"]
+visible = false
+
+[node name="Wall29" parent="Map" index="68"]
+visible = false
+
+[node name="Wall30" parent="Map" index="69"]
+visible = false
+
+[node name="Wall39" parent="Map" index="76"]
+visible = false
+
+[node name="Wall40" parent="Map" index="77"]
+visible = false
+
+[node name="Wall42" parent="Map" index="78"]
+visible = false
+
+[node name="Wall43" parent="Map" index="79"]
+visible = false
+
+[node name="Wall44" parent="Map" index="80"]
+visible = false
+
+[node name="Wall65" parent="Map" index="81"]
+visible = false
+
+[node name="Wall45" parent="Map" index="82"]
+visible = false
+
+[node name="Wall48" parent="Map" index="83"]
+visible = false
+
+[node name="Wall59" parent="Map" index="84"]
+visible = false
+
+[node name="Wall63" parent="Map" index="85"]
+visible = false
+
+[node name="Wall64" parent="Map" index="86"]
+visible = false
+
+[node name="Wall68" parent="Map" index="87"]
+visible = false
+
+[node name="Wall73" parent="Map" index="88"]
+visible = false
+
+[node name="Wall139" parent="Map" index="89"]
+visible = false
+
+[node name="Wall140" parent="Map" index="90"]
+visible = false
+
+[node name="Wall74" parent="Map" index="91"]
+visible = false
+
+[node name="Wall75" parent="Map" index="92"]
+visible = false
+
+[node name="Wall76" parent="Map" index="93"]
+visible = false
+
+[node name="Wall136" parent="Map" index="94"]
+visible = false
+
+[node name="Wall144" parent="Map" index="95"]
+visible = false
+
+[node name="Wall145" parent="Map" index="96"]
+visible = false
+
+[node name="Wall149" parent="Map" index="97"]
+visible = false
+
+[node name="Wall150" parent="Map" index="98"]
+visible = false
+
+[node name="Wall137" parent="Map" index="99"]
+visible = false
+
+[node name="Wall138" parent="Map" index="100"]
+visible = false
+
+[node name="Wall66" parent="Map" index="101"]
+visible = false
+
+[node name="Wall67" parent="Map" index="102"]
+visible = false
+
+[node name="Wall49" parent="Map" index="103"]
+visible = false
+
+[node name="Wall50" parent="Map" index="104"]
+visible = false
+
+[node name="Wall133" parent="Map" index="105"]
+visible = false
+
+[node name="Wall134" parent="Map" index="106"]
+visible = false
+
+[node name="Wall46" parent="Map" index="107"]
+visible = false
+
+[node name="Wall84" parent="Map" index="120"]
+visible = false
+
+[node name="Wall85" parent="Map" index="121"]
+visible = false
+
+[node name="Wall86" parent="Map" index="122"]
+visible = false
+
+[node name="Wall87" parent="Map" index="123"]
+visible = false
+
+[node name="Wall82" parent="Map" index="124"]
+visible = false
+
+[node name="Wall83" parent="Map" index="125"]
+visible = false
+
+[node name="Wall88" parent="Map" index="126"]
+visible = false
+
+[node name="Wall89" parent="Map" index="127"]
+visible = false
+
+[node name="Wall90" parent="Map" index="128"]
+visible = false
+
+[node name="Wall91" parent="Map" index="129"]
+visible = false
+
+[node name="Wall34" parent="Map" index="134"]
+visible = false
+
+[node name="Wall33" parent="Map" index="135"]
+visible = false
+
+[node name="Wall32" parent="Map" index="138"]
+visible = false
+
+[node name="Wall4" parent="Map" index="139"]
+visible = false
+
+[node name="Wall5" parent="Map" index="140"]
+visible = false
+
+[node name="Wall112" parent="Map" index="141"]
+visible = false
+
+[node name="Wall115" parent="Map" index="142"]
+visible = false
+
+[node name="Wall116" parent="Map" index="143"]
+visible = false
+
+[node name="Wall118" parent="Map" index="144"]
+visible = false
+
+[node name="Wall119" parent="Map" index="145"]
+visible = false
+
+[node name="Wall120" parent="Map" index="146"]
+visible = false
+
+[node name="Wall121" parent="Map" index="147"]
+visible = false
+
+[node name="Wall125" parent="Map" index="148"]
+visible = false
+
+[node name="Wall127" parent="Map" index="149"]
+visible = false
+
+[node name="Wall126" parent="Map" index="150"]
+visible = false
+
+[node name="Wall131" parent="Map" index="151"]
+visible = false
+
+[node name="Wall132" parent="Map" index="152"]
+visible = false
+
+[node name="Wall122" parent="Map" index="153"]
+visible = false
+
+[node name="Wall123" parent="Map" index="154"]
+visible = false
+
+[node name="Wall128" parent="Map" index="155"]
+visible = false
+
+[node name="Wall129" parent="Map" index="156"]
+visible = false
+
+[node name="Wall130" parent="Map" index="157"]
+visible = false
+
+[node name="Wall124" parent="Map" index="158"]
+visible = false
+
+[node name="Wall6" parent="Map" index="159"]
+visible = false
+
+[node name="Wall7" parent="Map" index="160"]
+visible = false
+
+[node name="Wall8" parent="Map" index="161"]
+visible = false
+
+[node name="CrackedWall2" parent="Map" index="162"]
+visible = false
+
+[node name="CrackedWall3" parent="Map" index="163"]
+visible = false
+
+[node name="cone3" parent="Map" index="164"]
+visible = false
+
+[node name="cone4" parent="Map" index="165"]
+visible = false
+
+[node name="cone5" parent="Map" index="166"]
+visible = false
+
+[node name="sign3" parent="Map" index="167"]
+visible = false
+
+[node name="cone6" parent="Map" index="168"]
+visible = false
+
+[node name="cone7" parent="Map" index="169"]
+visible = false
+
+[node name="cone8" parent="Map" index="170"]
+visible = false
+
+[node name="cone9" parent="Map" index="171"]
+visible = false
+
+[node name="cone42" parent="Map" index="172"]
+visible = false
+
+[node name="cone10" parent="Map" index="173"]
+visible = false
+
+[node name="cone41" parent="Map" index="174"]
+visible = false
+
+[node name="cone11" parent="Map" index="175"]
+visible = false
+
+[node name="ramp" parent="Map" index="176"]
+visible = false
+
+[node name="ring2" parent="Map" index="177"]
+visible = false
+
+[node name="CrackedWall4" parent="Map" index="178"]
+visible = false
+
+[node name="cone12" parent="Map" index="179"]
+visible = false
+
+[node name="cone13" parent="Map" index="180"]
+visible = false
+
+[node name="cone14" parent="Map" index="181"]
+visible = false
+
+[node name="cone15" parent="Map" index="182"]
+visible = false
+
+[node name="cone16" parent="Map" index="183"]
+visible = false
+
+[node name="cone17" parent="Map" index="184"]
+visible = false
+
+[node name="cone18" parent="Map" index="185"]
+visible = false
+
+[node name="cone19" parent="Map" index="186"]
+visible = false
+
+[node name="cone20" parent="Map" index="187"]
+visible = false
+
+[node name="cone21" parent="Map" index="188"]
+visible = false
+
+[node name="cone22" parent="Map" index="189"]
+visible = false
+
+[node name="building" parent="Map" index="190"]
+visible = false
+
+[node name="building2" parent="Map" index="191"]
+visible = false
+
+[node name="building3" parent="Map" index="192"]
+visible = false
+
+[node name="building6" parent="Map" index="195"]
+visible = false
+
+[node name="building8" parent="Map" index="197"]
+visible = false
+
+[node name="platform" parent="Map" index="199"]
+visible = false
+
+[node name="platform2" parent="Map" index="200"]
+visible = false
+
+[node name="platform3" parent="Map" index="201"]
+visible = false
+
+[node name="platform4" parent="Map" index="202"]
+visible = false
+
+[node name="platform5" parent="Map" index="203"]
+visible = false
+
+[node name="platform6" parent="Map" index="204"]
+visible = false
+
+[node name="platform7" parent="Map" index="205"]
+visible = false
+
+[node name="platform8" parent="Map" index="206"]
+visible = false
+
+[node name="platform9" parent="Map" index="207"]
+visible = false
+
+[node name="platform10" parent="Map" index="208"]
+visible = false
+
+[node name="platform11" parent="Map" index="209"]
+visible = false
+
+[node name="platform12" parent="Map" index="210"]
+visible = false
+
+[node name="platform13" parent="Map" index="211"]
+visible = false
+
+[node name="platform41" parent="Map" index="212"]
+visible = false
+
+[node name="platform42" parent="Map" index="213"]
+visible = false
+
+[node name="platform43" parent="Map" index="214"]
+visible = false
+
+[node name="platform44" parent="Map" index="215"]
+visible = false
+
+[node name="platform45" parent="Map" index="216"]
+visible = false
+
+[node name="platform46" parent="Map" index="217"]
+visible = false
+
+[node name="platform14" parent="Map" index="218"]
+visible = false
+
+[node name="platform15" parent="Map" index="219"]
+visible = false
+
+[node name="platform16" parent="Map" index="220"]
+visible = false
+
+[node name="platform17" parent="Map" index="221"]
+visible = false
+
+[node name="platform18" parent="Map" index="222"]
+visible = false
+
+[node name="platform19" parent="Map" index="223"]
+visible = false
+
+[node name="platform20" parent="Map" index="224"]
+visible = false
+
+[node name="platform21" parent="Map" index="225"]
+visible = false
+
+[node name="platform22" parent="Map" index="226"]
+visible = false
+
+[node name="platform23" parent="Map" index="227"]
+visible = false
+
+[node name="platform24" parent="Map" index="228"]
+visible = false
+
+[node name="platform25" parent="Map" index="229"]
+visible = false
+
+[node name="platform26" parent="Map" index="230"]
+visible = false
+
+[node name="platform27" parent="Map" index="231"]
+visible = false
+
+[node name="platform28" parent="Map" index="232"]
+visible = false
+
+[node name="platform29" parent="Map" index="233"]
+visible = false
+
+[node name="platform30" parent="Map" index="234"]
+visible = false
+
+[node name="platform31" parent="Map" index="235"]
+visible = false
+
+[node name="platform32" parent="Map" index="236"]
+visible = false
+
+[node name="platform33" parent="Map" index="237"]
+visible = false
+
+[node name="platform34" parent="Map" index="238"]
+visible = false
+
+[node name="platform35" parent="Map" index="239"]
+visible = false
+
+[node name="platform36" parent="Map" index="240"]
+visible = false
+
+[node name="platform37" parent="Map" index="241"]
+visible = false
+
+[node name="platform38" parent="Map" index="242"]
+visible = false
+
+[node name="platform47" parent="Map" index="243"]
+visible = false
+
+[node name="platform48" parent="Map" index="244"]
+visible = false
+
+[node name="platform49" parent="Map" index="245"]
+visible = false
+
+[node name="platform50" parent="Map" index="246"]
+visible = false
+
+[node name="platform51" parent="Map" index="247"]
+visible = false
+
+[node name="platform52" parent="Map" index="248"]
+visible = false
+
+[node name="platform39" parent="Map" index="249"]
+visible = false
+
+[node name="platform40" parent="Map" index="250"]
+visible = false
+
+[node name="garbagebin" parent="Map" index="251"]
+visible = false
+
+[node name="garbagebin2" parent="Map" index="252"]
+visible = false
+
+[node name="garbagebin5" parent="Map" index="258"]
+visible = false
+
+[node name="garbagebin6" parent="Map" index="259"]
+visible = false
+
+[node name="garbagebin8" parent="Map" index="267"]
+visible = false
+
+[node name="garbagebin9" parent="Map" index="268"]
+visible = false
+
+[node name="cone31" parent="Map" index="269"]
+visible = false
+
+[node name="cone32" parent="Map" index="270"]
+visible = false
+
+[node name="cone33" parent="Map" index="271"]
+visible = false
+
+[node name="cone34" parent="Map" index="272"]
+visible = false
+
+[node name="cone35" parent="Map" index="273"]
+visible = false
+
+[node name="cone36" parent="Map" index="274"]
+visible = false
+
+[node name="cone37" parent="Map" index="275"]
+visible = false
+
+[node name="cone38" parent="Map" index="276"]
+visible = false
+
+[node name="cone39" parent="Map" index="277"]
+visible = false
+
+[node name="cone40" parent="Map" index="278"]
+visible = false
+
+[node name="garbagebin10" parent="Map" index="279"]
+visible = false
+
+[node name="CrackedWall6" parent="Map" index="280"]
+visible = false
+
+[node name="garbagebin11" parent="Map" index="281"]
+visible = false
+
+[node name="platform53" parent="Map" index="282"]
+visible = false
+
+[node name="platform54" parent="Map" index="283"]
+visible = false
+
+[node name="platform_tall" parent="Map" index="284"]
+visible = false
+
+[node name="platform_tall2" parent="Map" index="285"]
+visible = false
+
+[node name="platform_tall3" parent="Map" index="286"]
+visible = false
+
+[node name="platform_tall4" parent="Map" index="287"]
+visible = false
+
+[node name="platform_tall5" parent="Map" index="288"]
+visible = false
+
+[node name="platform_tall6" parent="Map" index="289"]
+visible = false
+
+[node name="cone43" parent="Map" index="290"]
+visible = false
+
+[node name="cone44" parent="Map" index="291"]
+visible = false
+
+[node name="Wall47" parent="Map" index="292"]
+visible = false
+
+[node name="ramp10" parent="Map" index="293"]
+visible = false
+
+[node name="ramp11" parent="Map" index="294"]
+visible = false
+
+[node name="platform_tall8" parent="Map" index="295"]
+visible = false
+
+[node name="platform_tall9" parent="Map" index="296"]
+visible = false
+
+[node name="platform61" parent="Map" index="298"]
+visible = false
+
+[node name="platform62" parent="Map" index="299"]
+visible = false
+
+[node name="platform63" parent="Map" index="300"]
+visible = false
+
+[node name="platform64" parent="Map" index="301"]
+visible = false
+
+[node name="platform65" parent="Map" index="302"]
+visible = false
+
+[node name="platform66" parent="Map" index="303"]
+visible = false
+
+[node name="platform67" parent="Map" index="304"]
+visible = false
+
+[node name="platform68" parent="Map" index="305"]
+visible = false
+
+[node name="platform69" parent="Map" index="306"]
+visible = false
+
+[node name="platform70" parent="Map" index="307"]
+visible = false
+
+[node name="platform71" parent="Map" index="308"]
+visible = false
+
+[node name="platform72" parent="Map" index="309"]
+visible = false
+
+[node name="platform73" parent="Map" index="310"]
+visible = false
+
+[node name="platform74" parent="Map" index="311"]
+visible = false
+
+[node name="platform75" parent="Map" index="312"]
+visible = false
+
+[node name="platform76" parent="Map" index="313"]
+visible = false
+
+[node name="platform77" parent="Map" index="314"]
+visible = false
+
+[node name="platform78" parent="Map" index="315"]
+visible = false
+
+[node name="platform85" parent="Map" index="317"]
+visible = false
+
+[node name="platform86" parent="Map" index="318"]
+visible = false
+
+[node name="platform87" parent="Map" index="319"]
+visible = false
+
+[node name="platform88" parent="Map" index="320"]
+visible = false
+
+[node name="trafficlight2" parent="Map" index="322"]
+visible = false
+
+[node name="trafficlight3" parent="Map" index="323"]
+visible = false
+
+[node name="garbagebin12" parent="Map" index="324"]
+visible = false
+
+[node name="sign7" parent="Map" index="325"]
+visible = false
+
+[node name="trafficlight4" parent="Map" index="326"]
+visible = false
+
+[node name="cone45" parent="Map" index="327"]
+visible = false
+
+[node name="cone46" parent="Map" index="328"]
+visible = false
+
+[node name="cone47" parent="Map" index="329"]
+visible = false
+
+[node name="cone48" parent="Map" index="330"]
+visible = false
+
+[node name="cone49" parent="Map" index="331"]
+visible = false
+
+[node name="cone50" parent="Map" index="332"]
+visible = false
+
+[node name="cone51" parent="Map" index="333"]
+visible = false
+
+[node name="cone52" parent="Map" index="334"]
+visible = false
+
+[node name="garbagebin13" parent="Map" index="335"]
+visible = false
+
+[node name="garbagebin14" parent="Map" index="336"]
+visible = false
+
+[node name="can4" parent="Map" index="343"]
+visible = false
+
+[node name="can5" parent="Map" index="344"]
+visible = false
+
+[node name="can6" parent="Map" index="345"]
+visible = false
+
+[node name="can7" parent="Map" index="346"]
+visible = false
+
+[node name="can8" parent="Map" index="347"]
+visible = false
+
+[node name="garbagebin17" parent="Map" index="348"]
+visible = false
+
+[node name="cone53" parent="Map" index="351"]
+visible = false
+
+[node name="can11" parent="Map" index="352"]
+visible = false
+
+[node name="can12" parent="Map" index="353"]
+visible = false
+
+[node name="can13" parent="Map" index="354"]
+visible = false
+
+[node name="garbagebin18" parent="Map" index="355"]
+visible = false
+
+[node name="cone54" parent="Map" index="356"]
+visible = false
+
+[node name="trafficlight5" parent="Map" index="357"]
+visible = false
+
+[node name="can14" parent="Map" index="358"]
+visible = false
+
+[node name="can15" parent="Map" index="359"]
+visible = false
+
+[node name="sign9" parent="Map" index="360"]
+visible = false
+
+[node name="trafficlight6" parent="Map" index="361"]
+visible = false
+
+[node name="garbagebin19" parent="Map" index="362"]
+visible = false
+
+[node name="cone55" parent="Map" index="363"]
+visible = false
+
+[node name="cone56" parent="Map" index="364"]
+visible = false
+
+[node name="can16" parent="Map" index="365"]
+visible = false
+
+[node name="can17" parent="Map" index="366"]
+visible = false
+
+[node name="can18" parent="Map" index="367"]
+visible = false
+
+[node name="can19" parent="Map" index="368"]
+visible = false
+
+[node name="pot3" parent="Map" index="371"]
+visible = false
+
+[node name="pot4" parent="Map" index="372"]
+visible = false
+
+[node name="pot5" parent="Map" index="373"]
+visible = false
+
+[node name="pot6" parent="Map" index="374"]
+visible = false
+
+[node name="pot8" parent="Map" index="376"]
+visible = false
+
+[node name="pot9" parent="Map" index="377"]
+visible = false
+
+[node name="pot10" parent="Map" index="378"]
+visible = false
+
+[node name="can20" parent="Map" index="379"]
+visible = false
+
+[node name="can21" parent="Map" index="380"]
+visible = false
+
 [node name="Camera3D" type="Camera3D" parent="Map"]
-transform = Transform3D(-0.97237, 0.0312785, 0.23134, 0, 0.990983, -0.133986, -0.233445, -0.130284, -0.963602, -37.117, 0.789, -0.024)
+transform = Transform3D(-0.97237, 0.0312784, 0.23134, 0, 0.990983, -0.133986, -0.233445, -0.130284, -0.963602, -37.117, 0.789, -0.024)
 environment = ExtResource("3_eo67r")
 fov = 80.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Map/Camera3D"]
 transform = Transform3D(1, 3.55271e-15, -2.13163e-14, 0, 1, 0, 0, 0, 1, 0, 0, -0.084)
+visible = false
 mesh = SubResource("QuadMesh_japfl")
 surface_material_override/0 = SubResource("ShaderMaterial_smr3k")
 
@@ -121,46 +1125,172 @@ transform = Transform3D(-1, -8.74228e-08, -3.82137e-15, 0, -4.37114e-08, 1, -8.7
 pixel_size = 0.0058
 shaded = true
 texture_filter = 4
-text = "PLAY"
+text = "play"
 font = ExtResource("3_hou13")
 font_size = 64
 outline_size = 30
 
 [node name="PlayArea" type="Area3D" parent="Map/Play"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.045796, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0514202, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Play/PlayArea"]
-shape = SubResource("BoxShape3D_udiqg")
+shape = SubResource("BoxShape3D_4tycn")
 
-[node name="Stop" type="Label3D" parent="Map"]
-transform = Transform3D(-0.77384, 0, 0.633381, 0, 1, 0, -0.633381, 0, -0.77384, -40.3, 5.445, 7.075)
-pixel_size = 0.0071
+[node name="HoverAudio" type="AudioStreamPlayer3D" parent="Map/Play"]
+stream = ExtResource("6_0vpsi")
+unit_size = 9.18
+bus = &"sfx"
+
+[node name="Settings" type="Label3D" parent="Map"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -24.0394, 8.72518, 21.1496)
+pixel_size = 0.0232
 shaded = true
 texture_filter = 4
-text = "STOP
-  PLAYING"
+text = "settings"
 font = ExtResource("3_hou13")
 font_size = 64
 outline_size = 30
-horizontal_alignment = 0
+
+[node name="SettingsArea" type="Area3D" parent="Map/Settings"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Settings/SettingsArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.144106)
+shape = SubResource("BoxShape3D_udiqg")
+
+[node name="HoverAudio" type="AudioStreamPlayer3D" parent="Map/Settings"]
+stream = ExtResource("6_0vpsi")
+unit_size = 9.18
+bus = &"sfx"
+
+[node name="Stop" type="Label3D" parent="Map"]
+transform = Transform3D(-0.77384, 0, 0.633381, 0, 1, 0, -0.633381, 0, -0.77384, -40.814, 5.483, 6.632)
+pixel_size = 0.0125
+shaded = true
+texture_filter = 4
+text = "quit"
+font = ExtResource("3_hou13")
+font_size = 64
+outline_size = 30
 
 [node name="StopArea" type="Area3D" parent="Map/Stop"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.773, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map/Stop/StopArea"]
 shape = SubResource("BoxShape3D_ugfvb")
 
+[node name="HoverAudio" type="AudioStreamPlayer3D" parent="Map/Stop"]
+stream = ExtResource("6_0vpsi")
+unit_size = 9.18
+bus = &"sfx"
+
+[node name="boombox" parent="Map" instance=ExtResource("7_r4kbu")]
+transform = Transform3D(-0.842838, 0, -0.538168, 0, 1, 0, 0.538168, 0, -0.842838, -34.882, 0.501, 9.408)
+
+[node name="Boombox" parent="Map/boombox" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.800814, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="AnimationPlayer" parent="Map/boombox" index="1"]
+autoplay = "BoomboxAction001"
+speed_scale = 1.2
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Map/boombox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.12936, 0.818789, 0.464539)
+amount = 5
+lifetime = 4.84
+process_material = SubResource("ParticleProcessMaterial_38f6w")
+draw_pass_1 = SubResource("QuadMesh_3bfhb")
+
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("3_eme63")
+volume_db = -20.0
 autoplay = true
 bus = &"mus"
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_0vpsi")
+bus = &"sfx"
+
+[node name="Overlay" parent="." instance=ExtResource("10_q4re1")]
+
+[node name="C" type="Control" parent="Overlay"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("11_swr3v")
+
+[node name="C" type="CenterContainer" parent="Overlay/C"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="V" type="VBoxContainer" parent="Overlay/C/C"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="Music" type="VBoxContainer" parent="Overlay/C/C/V"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="Overlay/C/C/V/Music"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+text = "music"
+
+[node name="MusicSlider" type="HSlider" parent="Overlay/C/C/V/Music"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Sound" type="VBoxContainer" parent="Overlay/C/C/V"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Label" type="Label" parent="Overlay/C/C/V/Sound"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+text = "sounds"
+horizontal_alignment = 2
+
+[node name="SoundSlider" type="HSlider" parent="Overlay/C/C/V/Sound"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Back" type="Button" parent="Overlay/C/C/V"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "back"
+alignment = 0
 
 [connection signal="input_event" from="Map/Play/PlayArea" to="." method="_on_play_area_input_event"]
 [connection signal="mouse_entered" from="Map/Play/PlayArea" to="." method="_on_play_area_mouse_entered"]
 [connection signal="mouse_exited" from="Map/Play/PlayArea" to="." method="_on_play_area_mouse_exited"]
+[connection signal="input_event" from="Map/Settings/SettingsArea" to="." method="_on_settings_area_input_event"]
+[connection signal="mouse_entered" from="Map/Settings/SettingsArea" to="." method="_on_settings_area_mouse_entered"]
+[connection signal="mouse_exited" from="Map/Settings/SettingsArea" to="." method="_on_settings_area_mouse_exited"]
 [connection signal="input_event" from="Map/Stop/StopArea" to="." method="_on_stop_area_input_event"]
 [connection signal="mouse_entered" from="Map/Stop/StopArea" to="." method="_on_stop_area_mouse_entered"]
 [connection signal="mouse_exited" from="Map/Stop/StopArea" to="." method="_on_stop_area_mouse_exited"]
+[connection signal="value_changed" from="Overlay/C/C/V/Music/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="drag_ended" from="Overlay/C/C/V/Sound/SoundSlider" to="." method="_on_sound_slider_drag_ended"]
+[connection signal="value_changed" from="Overlay/C/C/V/Sound/SoundSlider" to="." method="_on_sound_slider_value_changed"]
+[connection signal="pressed" from="Overlay/C/C/V/Back" to="." method="_on_back_pressed"]
 
 [editable path="Map"]
 [editable path="Map/sign5"]
+[editable path="Map/boombox"]
+[editable path="Overlay"]

@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://c02ryld4xbbva"]
+[gd_scene load_steps=9 format=3 uid="uid://c02ryld4xbbva"]
 
 [ext_resource type="Script" path="res://scripts/game_over.gd" id="1_7lrwb"]
 [ext_resource type="FontFile" uid="uid://ds7l2e3nfwa4m" path="res://misc/beatstreet.ttf" id="2_2hhg1"]
 [ext_resource type="Theme" uid="uid://dxieua7c6kfsj" path="res://misc/theme.tres" id="2_cn6dn"]
+[ext_resource type="AudioStream" uid="uid://cp2paxho8kmw4" path="res://audio/sfx/game_over.wav" id="4_3yhki"]
+[ext_resource type="AudioStream" uid="uid://mbaxlii1w3tm" path="res://audio/sfx/object_hit.wav" id="5_oflpp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cw1l4"]
 bg_color = Color(0.054902, 0, 0.301961, 0.329412)
@@ -40,27 +42,51 @@ alignment = 1
 
 [node name="GameOver" type="Label" parent="C/P/V"]
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 24
 theme_override_fonts/font = ExtResource("2_2hhg1")
 theme_override_font_sizes/font_size = 36
 text = "GAME OVER"
-horizontal_alignment = 1
 
-[node name="Score" type="Label" parent="C/P/V"]
+[node name="HighScore" type="Label" parent="C/P/V"]
+visible = false
+custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 12
 theme_override_fonts/font = ExtResource("2_2hhg1")
 theme_override_font_sizes/font_size = 24
-text = "        score: %s"
-horizontal_alignment = 1
+text = "high score: %s"
+
+[node name="Score" type="Label" parent="C/P/V"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("2_2hhg1")
+theme_override_font_sizes/font_size = 24
+text = "score: %s"
+horizontal_alignment = 2
 
 [node name="Restart" type="Button" parent="C/P/V"]
+custom_minimum_size = Vector2(110, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_54qwq")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_d4ue8")
-text = "restart   "
+text = "restart"
+alignment = 0
 
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_3yhki")
+bus = &"mus"
+
+[node name="HoverAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_oflpp")
+bus = &"sfx"
+
+[connection signal="mouse_entered" from="C/P/V/Restart" to="." method="_on_restart_mouse_entered"]
 [connection signal="pressed" from="C/P/V/Restart" to="." method="_on_restart_pressed"]

@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://dyej8m0y354uw"]
+
+[ext_resource type="Theme" uid="uid://dxieua7c6kfsj" path="res://misc/theme.tres" id="1_52xvh"]
+[ext_resource type="Script" path="res://scripts/overlay.gd" id="1_mevgr"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fpye2"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Overlay" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_mevgr")
+
+[node name="M" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 40
+
+[node name="Explanation" type="Label" parent="M"]
+layout_mode = 2
+size_flags_vertical = 8
+theme = ExtResource("1_52xvh")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+autowrap_mode = 2
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_fpye2")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 7.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

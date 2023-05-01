@@ -6,8 +6,11 @@ signal bin_hit
 signal cone_hit
 signal sign_hit
 signal light_hit
+signal pot_destroyed
 signal delivery_started(id: int)
 signal delivery_done
+
+const PACKAGE = preload("res://scenes/package.tscn")
 
 const CAM_LOW: float = -50
 const CAM_LOW_Z = 13
@@ -51,7 +54,9 @@ var engine_audio_time: float = 0
 #
 #var playback: AudioStreamPlayback = null # Actual playback stream, assigned in _ready().
 
-#func _ready():
+func _ready():
+	connect("delivery_started", _on_delivery_started)
+	connect("delivery_done", _on_delivery_done)
 #	$EngineAudio.stream.mix_rate = sample_hz # Setting mix rate is only possible before play().
 #	$EngineAudio.play()
 #	playback = $EngineAudio.get_stream_playback()
@@ -129,6 +134,8 @@ func _physics_process(delta):
 			$DriftAudio.play()
 	else:
 			$DriftAudio.stop()
+	
+	$DriftAudio.volume_db = linear_to_db(velocity.length() / 35)
 	
 	last_velocity = get_real_velocity()
 	
@@ -223,3 +230,12 @@ func get_input(delta: float):
 	
 #	drifting = Input.is_action_pressed("handbrake")
 #	acceleration = acceleration.clamp(-Vector3(braking, 1000, braking), Vector3(engine_power, 1000, engine_power))
+
+func _on_delivery_started(id: int):
+	var package = PACKAGE.instantiate()
+	package.position = $CarBack/PackagePoint.position
+	$CarBack.add_child(package)
+
+func _on_delivery_done():
+	for package in get_tree().get_nodes_in_group("package"):
+		package.queue_free()

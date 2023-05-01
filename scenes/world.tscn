@@ -1,16 +1,26 @@
-[gd_scene load_steps=6 format=3 uid="uid://bhexvqp5vgyvj"]
+[gd_scene load_steps=11 format=3 uid="uid://bhexvqp5vgyvj"]
 
 [ext_resource type="PackedScene" uid="uid://drms2xcku6to3" path="res://scenes/car.tscn" id="1_kav1c"]
 [ext_resource type="Script" path="res://scripts/world.gd" id="1_yoa0g"]
 [ext_resource type="Environment" uid="uid://5vjbgd8jarup" path="res://misc/world.tres" id="3_js0i1"]
+[ext_resource type="PackedScene" uid="uid://dyej8m0y354uw" path="res://scenes/overlay.tscn" id="6_vcija"]
 [ext_resource type="PackedScene" uid="uid://cx1ftkeks1k1l" path="res://scenes/map.tscn" id="6_vtru8"]
+[ext_resource type="PackedScene" uid="uid://2byanj4v81e8" path="res://scenes/door.tscn" id="7_4lirw"]
+[ext_resource type="Material" uid="uid://ba3qeltp3nd5m" path="res://materials/platform.tres" id="8_sp1q6"]
 [ext_resource type="AudioStream" uid="uid://dthb6dx4nhsba" path="res://audio/music/ingame.ogg" id="11_8ukt0"]
 
-[node name="World" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_oeiak"]
+size = Vector3(15, 10, 0.2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dnbyv"]
+material = ExtResource("8_sp1q6")
+size = Vector3(15, 10, 0.2)
+
+[node name="World" type="Node3D" groups=["world"]]
 script = ExtResource("1_yoa0g")
 
 [node name="Car" parent="." instance=ExtResource("1_kav1c")]
-transform = Transform3D(-0.983916, 0, -0.178631, 0, 1, 0, 0.178631, 0, -0.983916, -50.616, 2, 36.4516)
+transform = Transform3D(-0.849165, 0, -0.528128, 0, 1, 0, 0.528128, 0, -0.849165, -51.616, 1.31077, 37.4516)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("3_js0i1")
@@ -23,7 +33,29 @@ shadow_enabled = true
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("11_8ukt0")
+volume_db = -20.0
 autoplay = true
 bus = &"mus"
 
 [node name="Map" parent="." instance=ExtResource("6_vtru8")]
+
+[node name="Overlay" parent="." instance=ExtResource("6_vcija")]
+
+[node name="PauseCamera" type="Camera3D" parent="."]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 40, 0)
+fov = 90.0
+size = 60.0
+
+[node name="Door" parent="." instance=ExtResource("7_4lirw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.2125, 5, 26.3641)
+
+[node name="Wall" type="AnimatableBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.4886, 5.17104, 26.3706)
+shape = SubResource("BoxShape3D_oeiak")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -59.4886, 5.17104, 26.3706)
+mesh = SubResource("BoxMesh_dnbyv")

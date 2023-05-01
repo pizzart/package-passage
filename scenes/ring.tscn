@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7cde6w1n5d4e"]
+[gd_scene load_steps=5 format=3 uid="uid://c7cde6w1n5d4e"]
 
 [ext_resource type="PackedScene" uid="uid://clmdlhagtav06" path="res://models/ring.glb" id="1_0qtlc"]
 [ext_resource type="Script" path="res://scripts/ring.gd" id="2_ndon5"]
+[ext_resource type="AudioStream" uid="uid://b8md80rpptypj" path="res://audio/sfx/counter.wav" id="3_1voce"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_lixuq"]
 height = 0.5
@@ -16,5 +17,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.80209, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_lixuq")
+
+[node name="EnterAudio" type="AudioStreamPlayer3D" parent="." index="2"]
+stream = ExtResource("3_1voce")
+volume_db = 10.0
+bus = &"sfx"
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_body_entered"]

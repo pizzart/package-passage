@@ -1,0 +1,80 @@
+[gd_scene load_steps=6 format=3 uid="uid://c3gy7v6totpue"]
+
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_dyq4s"]
+[ext_resource type="Theme" uid="uid://dxieua7c6kfsj" path="res://misc/theme.tres" id="1_hk6gu"]
+[ext_resource type="AudioStream" uid="uid://mbaxlii1w3tm" path="res://audio/sfx/object_hit.wav" id="3_vbvb7"]
+[ext_resource type="AudioStream" uid="uid://d2kymxonmfrot" path="res://audio/sfx/wall_break.wav" id="4_fn16a"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_khvwk"]
+bg_color = Color(0.054902, 0, 0.301961, 0.329412)
+
+[node name="PauseMenu" type="CanvasLayer"]
+process_mode = 3
+layer = 3
+visible = false
+script = ExtResource("1_dyq4s")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_hk6gu")
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_khvwk")
+
+[node name="CenterContainer" type="CenterContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Control/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 32
+text = "PAUSED"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/CenterContainer/VBoxContainer"]
+custom_minimum_size = Vector2(125, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Continue" type="Button" parent="Control/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "continue"
+alignment = 2
+
+[node name="Quit" type="Button" parent="Control/CenterContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "quit to menu"
+alignment = 0
+
+[node name="HoverAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_vbvb7")
+bus = &"sfx"
+
+[node name="PressAudio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_fn16a")
+bus = &"sfx"
+
+[connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/VBoxContainer/Continue" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/VBoxContainer/Continue" to="." method="_on_continue_pressed"]
+[connection signal="mouse_entered" from="Control/CenterContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="Control/CenterContainer/VBoxContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]

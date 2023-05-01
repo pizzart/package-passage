@@ -1,12 +1,22 @@
-[gd_scene load_steps=4 format=3 uid="uid://d1w2p7od15cas"]
+[gd_scene load_steps=7 format=3 uid="uid://d1w2p7od15cas"]
 
 [ext_resource type="PackedScene" uid="uid://bcuyq4ql8vst1" path="res://models/delivery.glb" id="1_80fmf"]
 [ext_resource type="Script" path="res://scripts/delivery.gd" id="2_37pew"]
+[ext_resource type="AudioStream" uid="uid://mky6vtr3lc2y" path="res://audio/sfx/delivery_started.wav" id="3_r7wy3"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b6q08"]
-size = Vector3(8, 1, 9)
+size = Vector3(8, 1, 10)
 
-[node name="delivery" instance=ExtResource("1_80fmf")]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8si2k"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.0588235, 0.698039, 0.968627, 0.278431)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_w3h5i"]
+material = SubResource("StandardMaterial3D_8si2k")
+size = Vector2(2.586, 3.192)
+
+[node name="delivery" groups=["delivery_point"] instance=ExtResource("1_80fmf")]
 script = ExtResource("2_37pew")
 
 [node name="Area3D" type="Area3D" parent="." index="1"]
@@ -14,5 +24,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -9.11558)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
 shape = SubResource("BoxShape3D_b6q08")
+
+[node name="DeliveryAudio" type="AudioStreamPlayer3D" parent="." index="2"]
+stream = ExtResource("3_r7wy3")
+unit_size = 20.0
+bus = &"sfx"
+
+[node name="AreaMesh" type="MeshInstance3D" parent="." index="3"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0.457638, -9.22888)
+mesh = SubResource("PlaneMesh_w3h5i")
+skeleton = NodePath("../Cube")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_body_entered" flags=18]

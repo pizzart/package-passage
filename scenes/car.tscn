@@ -12,11 +12,10 @@
 [ext_resource type="AudioStream" uid="uid://dcsxinvunl4r4" path="res://audio/sfx/engine.wav" id="9_w0d0m"]
 [ext_resource type="AudioStream" uid="uid://dd38j0eax08ta" path="res://audio/sfx/car_fall.wav" id="11_q670d"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_43e07"]
-albedo_color = Color(0.956863, 0.298039, 0.482353, 1)
-metallic = 0.41
-roughness = 0.34
-grow_amount = 0.722
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1d4pe"]
+albedo_color = Color(0.709804, 0.207843, 0.341176, 1)
+metallic = 0.2
+roughness = 0.18
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ng6sh"]
 size = Vector3(1.46057, 0.275914, 2.37561)
@@ -81,10 +80,10 @@ floor_max_angle = 1.0472
 script = ExtResource("1_lc25x")
 
 [node name="Truck" type="MeshInstance3D" parent="."]
-transform = Transform3D(-0.5, 0, -7.54979e-08, 0, 0.5, 0, 7.54979e-08, 0, -0.5, 0, -0.362262, -0.217442)
-material_override = SubResource("StandardMaterial3D_43e07")
+transform = Transform3D(-0.5, -0.000617555, 4.12993e-08, -0.000617555, 0.5, -0.000188803, 1.92011e-07, -0.000188803, -0.5, 0, -0.362262, -0.217442)
 gi_mode = 2
 mesh = ExtResource("2_1cndh")
+surface_material_override/0 = SubResource("StandardMaterial3D_1d4pe")
 
 [node name="Collision" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28309, -0.289875)
@@ -192,7 +191,7 @@ texture = ExtResource("6_3n8s3")
 [node name="DriftAudio" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("8_csgor")
 attenuation_model = 3
-volume_db = -6.0
+volume_db = -8.0
 bus = &"sfx"
 attenuation_filter_cutoff_hz = 20000.0
 

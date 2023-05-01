@@ -1,0 +1,86 @@
+[gd_scene load_steps=13 format=3 uid="uid://creduvd4kkrfo"]
+
+[ext_resource type="PackedScene" uid="uid://bquty7hc22thj" path="res://models/pot.glb" id="1_hyoh4"]
+[ext_resource type="Texture2D" uid="uid://c3ydfe0rlwlgk" path="res://textures/flower1.png" id="2_ijujb"]
+[ext_resource type="Script" path="res://scripts/pot.gd" id="2_t0uhv"]
+[ext_resource type="Texture2D" uid="uid://debqvxfhngtx5" path="res://textures/flower2.png" id="3_g4c3n"]
+[ext_resource type="Texture2D" uid="uid://bxyhh4j4y7wa2" path="res://models/pot_dirt.png" id="4_e1r77"]
+[ext_resource type="AudioStream" uid="uid://mbaxlii1w3tm" path="res://audio/sfx/object_hit.wav" id="6_rvicv"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_jk2kb"]
+size = Vector3(1.791, 1.711, 1.937)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_si16a"]
+direction = Vector3(0, 1, 0)
+spread = 10.0
+gravity = Vector3(0, -30, 0)
+initial_velocity_min = 12.0
+initial_velocity_max = 15.0
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ua52c"]
+load_path = "res://.godot/imported/brick-height.png-569f6f69f26b757fec4c7fe5d11591de.s3tc.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wfmjn"]
+load_path = "res://.godot/imported/brick-normal.png-bdab0c6d7091b3b3f30153b05b6b8059.s3tc.ctex"
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vwfdh"]
+resource_name = "bricks"
+cull_mode = 2
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("4_e1r77")
+normal_scale = 0.5
+normal_texture = SubResource("CompressedTexture2D_wfmjn")
+heightmap_scale = 2.0
+heightmap_texture = SubResource("CompressedTexture2D_ua52c")
+texture_filter = 2
+billboard_mode = 1
+
+[sub_resource type="QuadMesh" id="QuadMesh_3e8em"]
+material = SubResource("StandardMaterial3D_vwfdh")
+size = Vector2(0.8, 0.8)
+
+[node name="pot" instance=ExtResource("1_hyoh4")]
+script = ExtResource("2_t0uhv")
+
+[node name="StaticBody3D" parent="Pot" index="0"]
+collision_layer = 8
+collision_mask = 8
+
+[node name="Sprite3D" type="Sprite3D" parent="Pot" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.55161, -0.0564376)
+pixel_size = 0.05
+billboard = 2
+shaded = true
+texture_filter = 4
+texture = ExtResource("2_ijujb")
+
+[node name="Sprite3D2" type="Sprite3D" parent="Pot" index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.248316, 1.55161, 0.0836357)
+flip_h = true
+pixel_size = 0.05
+billboard = 2
+shaded = true
+texture_filter = 4
+texture = ExtResource("3_g4c3n")
+
+[node name="Area3D" type="Area3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.619811, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("BoxShape3D_jk2kb")
+
+[node name="DestroyParticles" type="GPUParticles3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.695232, 0)
+emitting = false
+amount = 6
+lifetime = 2.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_si16a")
+draw_pass_1 = SubResource("QuadMesh_3e8em")
+
+[node name="HitAudio" type="AudioStreamPlayer3D" parent="." index="3"]
+stream = ExtResource("6_rvicv")
+bus = &"sfx"
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_body_entered" flags=18]

@@ -8,6 +8,7 @@
 default_font = ExtResource("1_8bjir")
 
 [node name="HUD" type="CanvasLayer"]
+visible = false
 
 [node name="C" type="Control" parent="."]
 layout_mode = 3
@@ -26,6 +27,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
@@ -42,6 +44,7 @@ theme_override_font_sizes/font_size = 24
 text = "SCORE: 0"
 
 [node name="Time" type="Label" parent="C/M"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0

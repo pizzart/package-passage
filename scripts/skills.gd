@@ -14,6 +14,7 @@ func _ready():
 	car.connect("cone_hit", _on_cone_hit)
 	car.connect("sign_hit", _on_roadsign_hit)
 	car.connect("light_hit", _on_roadsign_hit)
+	car.connect("pot_destroyed", _on_pot_destroyed)
 	car.connect("delivery_done", _on_delivery_done)
 
 func _process(delta):
@@ -71,4 +72,7 @@ func _on_cone_hit():
 	short_skill("cone", "ROAD RAGE", 150)
 
 func _on_roadsign_hit():
-	short_skill("roadsign", "RULEBREAKER", 150)
+	short_skill("roadsign", "LAWBREAKER", 150)
+
+func _on_pot_destroyed():
+	short_skill("pot", "VANDALISM", 200)
