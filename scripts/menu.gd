@@ -2,10 +2,8 @@ extends Node
 
 @onready var init_cam_rot = $Map/Camera3D.rotation
 
-func _enter_tree():
-	load_settings()
-
 func _ready():
+	load_settings()
 	$Overlay/M.hide()
 	var tween = create_tween().set_parallel()
 	tween.tween_property($Overlay/Panel, "modulate", Color.TRANSPARENT, 3.0)
@@ -18,23 +16,35 @@ func load_settings():
 		if ERR_FILE_NOT_FOUND:
 			cfg.set_value("audio", "mus", 1.0)
 			cfg.set_value("audio", "sfx", 1.0)
+			cfg.set_value("window", "fullscreen", true)
 			cfg.set_value("game", "score", 0)
 			cfg.save("user://settings.cfg")
 		return
 	
 	var mus = cfg.get_value("audio", "mus", 1.0)
 	var sfx = cfg.get_value("audio", "sfx", 1.0)
+	var fullscreen = cfg.get_value("window", "fullscreen", true)
 	
 	AudioServer.set_bus_volume_db(2, linear_to_db(mus))
 	AudioServer.set_bus_volume_db(1, linear_to_db(sfx))
+	if fullscreen:
+		get_window().borderless = true
+		get_window().mode = Window.MODE_MAXIMIZED
+#		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+	else:
+		get_window().mode = Window.MODE_WINDOWED
+		get_window().borderless = false
+#		get_window().set_size(Vector2i(800, 600))
 	
 	$Overlay/C/C/V/Music/MusicSlider.value = mus
 	$Overlay/C/C/V/Sound/SoundSlider.value = sfx
+	%Fullscreen.button_pressed = fullscreen
 
 func save_settings():
 	var cfg = ConfigFile.new()
 	cfg.set_value("audio", "mus", $Overlay/C/C/V/Music/MusicSlider.value)
 	cfg.set_value("audio", "sfx", $Overlay/C/C/V/Sound/SoundSlider.value)
+	cfg.set_value("window", "fullscreen", %Fullscreen.button_pressed)
 	cfg.save("user://settings.cfg")
 
 func _on_play_area_input_event(camera, event, position, normal, shape_idx):
@@ -102,3 +112,13 @@ func _on_back_pressed():
 	tween.tween_property($Overlay/C, "modulate", Color.TRANSPARENT, 1.0)
 	await tween.finished
 	$Overlay/C.hide()
+
+func _on_fullscreen_toggled(button_pressed):
+	if button_pressed:
+		get_window().borderless = true
+		get_window().mode = Window.MODE_MAXIMIZED
+#		get_window().mode = Window.MODE_EXCLUSIVE_FULLSCREEN
+	else:
+		get_window().mode = Window.MODE_WINDOWED
+		get_window().borderless = false
+		get_window().set_size(Vector2i(800, 600))

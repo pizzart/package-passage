@@ -1,0 +1,67 @@
+[gd_scene load_steps=2 format=3 uid="uid://d03g1lov3qehv"]
+
+[ext_resource type="Theme" uid="uid://dxieua7c6kfsj" path="res://misc/theme.tres" id="1_0jlk5"]
+
+[node name="C" type="Control"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_0jlk5")
+
+[node name="C" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="V" type="VBoxContainer" parent="C"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+
+[node name="Music" type="VBoxContainer" parent="C/V"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="Label" type="Label" parent="C/V/Music"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+text = "music"
+
+[node name="MusicSlider" type="HSlider" parent="C/V/Music"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Sound" type="VBoxContainer" parent="C/V"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Label" type="Label" parent="C/V/Sound"]
+layout_mode = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+text = "sounds"
+horizontal_alignment = 2
+
+[node name="SoundSlider" type="HSlider" parent="C/V/Sound"]
+layout_mode = 2
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="Back" type="Button" parent="C/V"]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "back"
+alignment = 0

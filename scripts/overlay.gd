@@ -7,7 +7,7 @@ const TUTORIAL = {
 	"timer": "a timer is now running. deliver the package before it runs out!",
 	"arrow": "the arrow shows the direction to the recipient's house.",
 	"points": "on your way you will find signs, cones, ramps, rings, etc. they give points. get as many of them as you can!",
-	"drift": "you can drift using SPACE. it also gives points.",
+	"drift": "you can drift using SPACE. it also gives points, but reduces grip. use wisely.",
 	"tab": "switch between camera angles using TAB. press ESCAPE to pause the game.",
 	"return": "after delivering the package, return back to the point for another package, since the timer doesn't stop because you are on your job and have to work the entire work day otherwise your boss will get mad and you will be fired and you will have to find another job because we live ",
 	"hf": "have fun!",

@@ -1201,10 +1201,10 @@ process_material = SubResource("ParticleProcessMaterial_38f6w")
 draw_pass_1 = SubResource("QuadMesh_3bfhb")
 
 [node name="Sprite3D" type="Sprite3D" parent="Map"]
-transform = Transform3D(-0.843391, 0, -0.5373, 0, 1, 0, 0.5373, 0, -0.843391, -35.068, 1.565, 8.957)
-pixel_size = 0.0024
+transform = Transform3D(-0.999986, -0.00130215, -0.00507154, 0, 0.968583, -0.24869, 0.00523604, -0.248686, -0.96857, -36.282, 6.615, 8.457)
+pixel_size = 0.0071
 shaded = true
-texture_filter = 4
+texture_filter = 0
 texture = ExtResource("9_2svxu")
 
 [node name="MenuMusic" type="AudioStreamPlayer" parent="."]
@@ -1277,6 +1277,16 @@ max_value = 1.0
 step = 0.01
 value = 1.0
 
+[node name="Fullscreen" type="Button" parent="Overlay/C/C/V"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+toggle_mode = true
+button_pressed = true
+text = "fullscreen"
+alignment = 2
+
 [node name="Back" type="Button" parent="Overlay/C/C/V"]
 custom_minimum_size = Vector2(60, 0)
 layout_mode = 2
@@ -1296,6 +1306,7 @@ alignment = 0
 [connection signal="value_changed" from="Overlay/C/C/V/Music/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="drag_ended" from="Overlay/C/C/V/Sound/SoundSlider" to="." method="_on_sound_slider_drag_ended"]
 [connection signal="value_changed" from="Overlay/C/C/V/Sound/SoundSlider" to="." method="_on_sound_slider_value_changed"]
+[connection signal="toggled" from="Overlay/C/C/V/Fullscreen" to="." method="_on_fullscreen_toggled"]
 [connection signal="pressed" from="Overlay/C/C/V/Back" to="." method="_on_back_pressed"]
 
 [editable path="Map"]
